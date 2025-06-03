@@ -2,11 +2,8 @@ spring:
   application:
     name: report-ms
 
-  config:
-    import: "optional:configserver:http://localhost:7777"
-
 report:
-  template: /templates/
+  template: classpath:/templates/
 
 server:
   port: 7070
@@ -14,12 +11,8 @@ server:
     context-path: /report-ms
 
 eureka:
+  instance:
+    instance-id: "${spring.application.name}:${random.value}"
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    instance-id: "${spring.application.name}:${random.value}"
-
-logging:
-  level:
-    root: INFO
